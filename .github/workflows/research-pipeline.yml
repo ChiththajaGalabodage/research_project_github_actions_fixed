@@ -1,0 +1,65 @@
+name: Research Pipeline
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+  workflow_dispatch:
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run AI test generation pipeline
+        env:
+          GEMINI_API_KEY: ""
+        run: |
+          python main.py --source target_code.py --max-heal-attempts 2
+
+      - name: Validate generated tests
+        if: always()
+        run: |
+          python scripts/validate_generated_tests.py
+
+      - name: Run agentic vs traditional comparison
+        if: always()
+        env:
+          GEMINI_API_KEY: ""
+        run: |
+          python scripts/compare_methods.py --source target_code.py --runs 1
+
+      - name: Show generated files
+        if: always()
+        run: |
+          echo "Repository files:"
+          find . -maxdepth 3 -type f | sort
+          echo "Reports folder:"
+          ls -la reports || true
+
+      - name: Upload generated artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-test-generator-artifacts
+          path: |
+            tests/test_generated.py
+            reports/
+            metrics.csv
+            generated_tests/
+          if-no-files-found: warn

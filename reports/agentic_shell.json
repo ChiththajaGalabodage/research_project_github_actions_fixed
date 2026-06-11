@@ -1,0 +1,245 @@
+{
+  "timestamp_utc": "2026-06-10T17:48:26.445620+00:00",
+  "analysis": {
+    "file": "target_code.py",
+    "line_count": 79,
+    "function_count": 9,
+    "class_count": 0,
+    "imports": [],
+    "functions": [
+      {
+        "name": "add",
+        "args": [
+          "x",
+          "y"
+        ],
+        "has_docstring": false,
+        "line": 2
+      },
+      {
+        "name": "subtract",
+        "args": [
+          "x",
+          "y"
+        ],
+        "has_docstring": false,
+        "line": 6
+      },
+      {
+        "name": "multiply",
+        "args": [
+          "x",
+          "y"
+        ],
+        "has_docstring": false,
+        "line": 10
+      },
+      {
+        "name": "divide",
+        "args": [
+          "x",
+          "y"
+        ],
+        "has_docstring": false,
+        "line": 14
+      },
+      {
+        "name": "reset_demo_state",
+        "args": [],
+        "has_docstring": false,
+        "line": 21
+      },
+      {
+        "name": "main",
+        "args": [],
+        "has_docstring": false,
+        "line": 25
+      },
+      {
+        "name": "add",
+        "args": [
+          "a",
+          "b"
+        ],
+        "has_docstring": false,
+        "line": 66
+      },
+      {
+        "name": "get_user_age",
+        "args": [],
+        "has_docstring": false,
+        "line": 70
+      },
+      {
+        "name": "get_first_item",
+        "args": [
+          "my_list"
+        ],
+        "has_docstring": false,
+        "line": 74
+      }
+    ],
+    "classes": []
+  },
+  "test_file": "tests/test_generated.py",
+  "heal_attempts": 0,
+  "test_run": {
+    "command": "/opt/pyvenv/bin/python -m pytest -q --tb=short --disable-warnings tests/test_generated.py",
+    "return_code": 1,
+    "passed": false,
+    "output": "F..F...F                                                                 [100%]\n=================================== FAILURES ===================================\n___________________ test_add_returns_the_sum_of_two_numbers ____________________\ntests/test_generated.py:28: in test_add_returns_the_sum_of_two_numbers\n    assert add(1, 2) == 3\nE   assert -1 == 3\nE    +  where -1 = add(1, 2)\n__________ test_divide_returns_the_quotient_and_handles_zero_division __________\ntests/test_generated.py:19: in test_divide_returns_the_quotient_and_handles_zero_division\n    assert divide(5, 0) == \"Error: Cannot divide by zero!\"\n           ^^^^^^^^^^^^\ntarget_code.py:17: in divide\n    return x / y\n           ^^^^^\nE   ZeroDivisionError: division by zero\n_______________ test_get_first_item_returns_the_first_list_item ________________\ntests/test_generated.py:35: in test_get_first_item_returns_the_first_list_item\n    assert get_first_item([10, 20, 30]) == 10\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntarget_code.py:76: in get_first_item\n    return my_list[10]\n           ^^^^^^^^^^^\nE   IndexError: list index out of range\n=========================== short test summary info ============================\nFAILED tests/test_generated.py::test_add_returns_the_sum_of_two_numbers - assert -1 == 3\n +  where -1 = add(1, 2)\nFAILED tests/test_generated.py::test_divide_returns_the_quotient_and_handles_zero_division - ZeroDivisionError: division by zero\nFAILED tests/test_generated.py::test_get_first_item_returns_the_first_list_item - IndexError: list index out of range\n3 failed, 5 passed in 0.40s",
+    "start_time_utc": "2026-06-10T17:48:21.237897+00:00",
+    "end_time_utc": "2026-06-10T17:48:26.445431+00:00",
+    "duration_seconds": 5.208
+  },
+  "pipeline_events": [
+    {
+      "stage": "pipeline",
+      "status": "started",
+      "message": "Pipeline run started",
+      "timestamp_utc": "2026-06-10T17:48:21.231794+00:00",
+      "details": {
+        "source": "target_code.py"
+      }
+    },
+    {
+      "stage": "analysis",
+      "status": "running",
+      "message": "Analyzing source code",
+      "timestamp_utc": "2026-06-10T17:48:21.231895+00:00"
+    },
+    {
+      "stage": "analysis",
+      "status": "completed",
+      "message": "Source analysis completed",
+      "timestamp_utc": "2026-06-10T17:48:21.233589+00:00",
+      "details": {
+        "function_count": 9,
+        "class_count": 0
+      }
+    },
+    {
+      "stage": "generation",
+      "status": "running",
+      "message": "Generating tests",
+      "timestamp_utc": "2026-06-10T17:48:21.233612+00:00"
+    },
+    {
+      "stage": "validation",
+      "status": "running",
+      "message": "Validating generated tests",
+      "timestamp_utc": "2026-06-10T17:48:21.234934+00:00"
+    },
+    {
+      "stage": "validation",
+      "status": "completed",
+      "message": "Generated tests validated",
+      "timestamp_utc": "2026-06-10T17:48:21.237187+00:00",
+      "details": {
+        "passed": true,
+        "issues": []
+      }
+    },
+    {
+      "stage": "generation",
+      "status": "completed",
+      "message": "Test file written",
+      "timestamp_utc": "2026-06-10T17:48:21.237833+00:00",
+      "details": {
+        "test_file": "tests/test_generated.py",
+        "explanation_lines": 2
+      }
+    },
+    {
+      "stage": "test_run",
+      "status": "running",
+      "message": "Executing initial generated tests",
+      "timestamp_utc": "2026-06-10T17:48:21.237858+00:00",
+      "details": {
+        "test_file": "tests/test_generated.py"
+      }
+    },
+    {
+      "stage": "test_run",
+      "status": "completed",
+      "message": "Initial generated test run completed",
+      "timestamp_utc": "2026-06-10T17:48:26.445503+00:00",
+      "details": {
+        "passed": false,
+        "return_code": 1
+      }
+    },
+    {
+      "stage": "report",
+      "status": "running",
+      "message": "Writing report",
+      "timestamp_utc": "2026-06-10T17:48:26.445538+00:00"
+    },
+    {
+      "stage": "pipeline",
+      "status": "failed",
+      "message": "Pipeline finished: FAILED",
+      "timestamp_utc": "2026-06-10T17:48:26.445552+00:00",
+      "details": {
+        "original_test_passed": false,
+        "original_return_code": 1
+      }
+    }
+  ],
+  "predictive_selection": {
+    "enabled": false,
+    "base_ref": "HEAD~1",
+    "changed_files": [],
+    "selected_tests": [
+      "tests/test_generated.py"
+    ]
+  },
+  "heal_history": [],
+  "generation_explanation": [
+    "Covers 9 function(s) and 0 class(es) discovered in the target module.",
+    "Uses simple call-or-assert patterns so the tests stay executable and easy to heal."
+  ],
+  "metrics": {
+    "functions": 9,
+    "classes": 0,
+    "passed": false,
+    "durations_seconds": {
+      "analysis": 0.002,
+      "generation": 0.004,
+      "validation": 0.002,
+      "test_run": 5.208
+    },
+    "pipeline_total_seconds": 5.214
+  },
+  "initial_test_run": {
+    "command": "/opt/pyvenv/bin/python -m pytest -q --tb=short --disable-warnings tests/test_generated.py",
+    "return_code": 1,
+    "passed": false,
+    "output": "F..F...F                                                                 [100%]\n=================================== FAILURES ===================================\n___________________ test_add_returns_the_sum_of_two_numbers ____________________\ntests/test_generated.py:28: in test_add_returns_the_sum_of_two_numbers\n    assert add(1, 2) == 3\nE   assert -1 == 3\nE    +  where -1 = add(1, 2)\n__________ test_divide_returns_the_quotient_and_handles_zero_division __________\ntests/test_generated.py:19: in test_divide_returns_the_quotient_and_handles_zero_division\n    assert divide(5, 0) == \"Error: Cannot divide by zero!\"\n           ^^^^^^^^^^^^\ntarget_code.py:17: in divide\n    return x / y\n           ^^^^^\nE   ZeroDivisionError: division by zero\n_______________ test_get_first_item_returns_the_first_list_item ________________\ntests/test_generated.py:35: in test_get_first_item_returns_the_first_list_item\n    assert get_first_item([10, 20, 30]) == 10\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntarget_code.py:76: in get_first_item\n    return my_list[10]\n           ^^^^^^^^^^^\nE   IndexError: list index out of range\n=========================== short test summary info ============================\nFAILED tests/test_generated.py::test_add_returns_the_sum_of_two_numbers - assert -1 == 3\n +  where -1 = add(1, 2)\nFAILED tests/test_generated.py::test_divide_returns_the_quotient_and_handles_zero_division - ZeroDivisionError: division by zero\nFAILED tests/test_generated.py::test_get_first_item_returns_the_first_list_item - IndexError: list index out of range\n3 failed, 5 passed in 0.40s",
+    "start_time_utc": "2026-06-10T17:48:21.237897+00:00",
+    "end_time_utc": "2026-06-10T17:48:26.445431+00:00",
+    "duration_seconds": 5.208
+  },
+  "selected_test_run_before_heal": null,
+  "defect_detection_test_run": {
+    "command": "/opt/pyvenv/bin/python -m pytest -q --tb=short --disable-warnings tests/test_generated.py",
+    "return_code": 1,
+    "passed": false,
+    "output": "F..F...F                                                                 [100%]\n=================================== FAILURES ===================================\n___________________ test_add_returns_the_sum_of_two_numbers ____________________\ntests/test_generated.py:28: in test_add_returns_the_sum_of_two_numbers\n    assert add(1, 2) == 3\nE   assert -1 == 3\nE    +  where -1 = add(1, 2)\n__________ test_divide_returns_the_quotient_and_handles_zero_division __________\ntests/test_generated.py:19: in test_divide_returns_the_quotient_and_handles_zero_division\n    assert divide(5, 0) == \"Error: Cannot divide by zero!\"\n           ^^^^^^^^^^^^\ntarget_code.py:17: in divide\n    return x / y\n           ^^^^^\nE   ZeroDivisionError: division by zero\n_______________ test_get_first_item_returns_the_first_list_item ________________\ntests/test_generated.py:35: in test_get_first_item_returns_the_first_list_item\n    assert get_first_item([10, 20, 30]) == 10\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntarget_code.py:76: in get_first_item\n    return my_list[10]\n           ^^^^^^^^^^^\nE   IndexError: list index out of range\n=========================== short test summary info ============================\nFAILED tests/test_generated.py::test_add_returns_the_sum_of_two_numbers - assert -1 == 3\n +  where -1 = add(1, 2)\nFAILED tests/test_generated.py::test_divide_returns_the_quotient_and_handles_zero_division - ZeroDivisionError: division by zero\nFAILED tests/test_generated.py::test_get_first_item_returns_the_first_list_item - IndexError: list index out of range\n3 failed, 5 passed in 0.40s",
+    "start_time_utc": "2026-06-10T17:48:21.237897+00:00",
+    "end_time_utc": "2026-06-10T17:48:26.445431+00:00",
+    "duration_seconds": 5.208
+  },
+  "final_test_run": {
+    "command": "/opt/pyvenv/bin/python -m pytest -q --tb=short --disable-warnings tests/test_generated.py",
+    "return_code": 1,
+    "passed": false,
+    "output": "F..F...F                                                                 [100%]\n=================================== FAILURES ===================================\n___________________ test_add_returns_the_sum_of_two_numbers ____________________\ntests/test_generated.py:28: in test_add_returns_the_sum_of_two_numbers\n    assert add(1, 2) == 3\nE   assert -1 == 3\nE    +  where -1 = add(1, 2)\n__________ test_divide_returns_the_quotient_and_handles_zero_division __________\ntests/test_generated.py:19: in test_divide_returns_the_quotient_and_handles_zero_division\n    assert divide(5, 0) == \"Error: Cannot divide by zero!\"\n           ^^^^^^^^^^^^\ntarget_code.py:17: in divide\n    return x / y\n           ^^^^^\nE   ZeroDivisionError: division by zero\n_______________ test_get_first_item_returns_the_first_list_item ________________\ntests/test_generated.py:35: in test_get_first_item_returns_the_first_list_item\n    assert get_first_item([10, 20, 30]) == 10\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntarget_code.py:76: in get_first_item\n    return my_list[10]\n           ^^^^^^^^^^^\nE   IndexError: list index out of range\n=========================== short test summary info ============================\nFAILED tests/test_generated.py::test_add_returns_the_sum_of_two_numbers - assert -1 == 3\n +  where -1 = add(1, 2)\nFAILED tests/test_generated.py::test_divide_returns_the_quotient_and_handles_zero_division - ZeroDivisionError: division by zero\nFAILED tests/test_generated.py::test_get_first_item_returns_the_first_list_item - IndexError: list index out of range\n3 failed, 5 passed in 0.40s",
+    "start_time_utc": "2026-06-10T17:48:21.237897+00:00",
+    "end_time_utc": "2026-06-10T17:48:26.445431+00:00",
+    "duration_seconds": 5.208
+  },
+  "pipeline_duration_seconds": 5.214,
+  "pipeline_start_utc": "2026-06-10T17:48:21.231769+00:00",
+  "pipeline_end_utc": "2026-06-10T17:48:26.445635+00:00"
+}

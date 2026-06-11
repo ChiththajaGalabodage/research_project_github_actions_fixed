@@ -1,0 +1,12 @@
+metric,agentic_method,traditional_method,better,winner,why_important
+Test coverage,100.0,38.3,Higher,agentic,Line coverage for the target source module.
+Defect detection rate,25.0,26.67,Higher,traditional,Failing/error tests divided by total executed tests. Higher means defects are found with fewer tests.
+Execution time,5.656,5.285,Lower,traditional,"Measured pytest execution time for the benchmarked test set. For agentic mode this is the selected/generated target tests, not the full LLM pipeline setup time."
+Number of tests executed,8.0,150.0,Lower,agentic,Total pytest outcomes counted from the final pytest summary: passed + failed + errors + skipped + xfailed + xpassed.
+Test reduction percentage,94.67,0.0,Higher,agentic,How many fewer tests were executed compared with the traditional target-test baseline.
+Pass rate,75.0,73.33,Higher,agentic,Passed tests divided by total executed tests.
+Generated test validity rate,see comparison_report.csv,N/A,Higher,agentic,Agentic only: generated tests that executed without collection/runtime infrastructure errors. Failing assertions still count as valid defect-detection tests.
+Coverage improvement,61.7,0.0,Higher,agentic,Coverage difference compared with the traditional target-test baseline.
+Selection accuracy,100.0,100.0,Higher,tie,Selected test files that directly target the source module divided by all selected test files.
+Manual effort,1.1,37.5,Lower,agentic,"Transparent proxy estimate from executed tests/heal attempts. Use only as an automation-effort indicator, not measured human time."
+Efficiency score,57.42,24.75,Higher,agentic,"Weighted index from defect density, test reduction, execution saving, coverage, pass rate, and selection accuracy."
