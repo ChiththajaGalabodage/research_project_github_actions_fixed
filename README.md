@@ -1,126 +1,49 @@
-# AI Test Generator
+# Simple Python App — Calculator Test Target
 
-A modular agentic testing framework for CI/CD that combines three autonomous agents:
+![Python](https://img.shields.io/badge/Python-Learning%20utility-3776AB?logo=python&logoColor=white)
+![Purpose](https://img.shields.io/badge/Purpose-Test%20subject-lightgrey)
 
-- Test generation agent (LLM + deterministic fallback)
-- Predictive test selection agent (change-impact based)
-- Self-healing agent (repairs failing generated tests)
+A small Python calculator module useful for **basic unit-testing demonstrations** and exploratory automated test generation. It is a **supporting test subject**, not a primary thesis implementation or the final FastAPI system under test.
 
-The framework can be executed standalone (`main.py`) or benchmarked against a traditional pipeline (`scripts/compare_methods.py`).
+## Implemented operations
 
-## Phase-Based Workflow
+| Function | Behavior |
+|---|---|
+| `add(a, b)` | Adds two numbers |
+| `subtract(a, b)` | Subtracts second operand from first |
+| `divide(a, b)` | Divides operands; raises `ValueError` for division by zero |
 
-### 1) Design Agentic Framework
+All logic is located in [`app/calculator.py`](app/calculator.py). The checked repository does not contain an included pytest suite or CI configuration.
 
-The framework is split into isolated modules so each capability can evolve independently:
-
-- `src/analyzer.py`: Extracts code structure via AST
-- `src/generator.py`: Generates tests with Gemini or deterministic fallback
-- `src/test_select_agent.py`: Selects impacted tests from code changes
-- `src/healer.py`: Repairs failing generated tests
-- `src/runner.py`: Executes selected tests
-- `src/reporter.py`: Writes structured run reports
-- `src/pipeline_tracker.py`: Tracks stage-by-stage lifecycle events
-
-This modular design makes the pipeline easy to plug into CI/CD systems and easy to extend with additional agents.
-
-### 2) Deploy Into CI/CD
-
-Deployment options:
-
-- Single agentic run: `python main.py --source target_code.py --max-heal-attempts 2 --predictive-test-selection`
-- Experiment mode (agentic vs traditional): `python scripts/compare_methods.py --source target_code.py --runs 3`
-
-The workflow in `.github/workflows/pipeline.yml` runs both modes and uploads artifacts.
-
-### 3) Compare with Traditional Methods
-
-Comparison script:
-
-- Runs agentic pipeline for `N` iterations
-- Runs traditional pytest baseline for `N` iterations
-- Captures metrics per run:
-  - Execution time
-  - Test counts (passed/failed/total)
-  - Defects detected (failed + errors)
-  - Coverage percentage (line coverage)
-  - Selected-test footprint
-
-Outputs:
-
-- `reports/comparison_report.json`
-- `reports/comparison_report.csv`
-- `reports/comparison_report.md`
-
-### 4) Analyze Results
-
-Use the generated reports for quantitative and qualitative analysis:
-
-- Quantitative: pass rate, average duration, average coverage, defect detection
-- Qualitative: healing behavior, selected test subset size, and per-run execution details
-
-The summary includes a direct delta section (`Agentic - Traditional`) to evaluate effectiveness, efficiency, and reliability.
-
-## Setup
+## Try it locally
 
 ```bash
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
+git clone https://github.com/ChiththajaGalabodage/Simple-Pythone-App.git
+cd Simple-Pythone-App
+python -c "from app.calculator import add, subtract, divide; print(add(2, 3)); print(subtract(5, 2)); print(divide(10, 2))"
 ```
 
-Optional (for LLM-backed generation):
+## Example unit tests (optional, not yet committed in this repo)
 
-```bash
-set GEMINI_API_KEY=your_api_key_here
+```python
+import pytest
+from app.calculator import add, subtract, divide
+
+def test_add():
+    assert add(2, 3) == 5
+
+def test_subtract():
+    assert subtract(5, 2) == 3
+
+def test_zero_division():
+    with pytest.raises(ValueError):
+        divide(5, 0)
 ```
 
-If no key is set, generation and healing still execute with deterministic local fallback behavior.
+Save these tests as `test_calculator.py` and run `python -m pytest -q` after installing pytest if you want to extend the sample. These are illustrative examples, **not a reported experiment**.
 
-## Usage
+## Relation to research
 
-### Agentic Pipeline
+Simple, deterministic modules are useful for validating that test-generation tooling can discover functions, generate valid tests, and detect obvious logic changes. Such smoke tests cannot support claims about end-to-end CI/CD performance on the final LLM-CTF case-study service.
 
-```bash
-python main.py --source target_code.py --max-heal-attempts 2 --predictive-test-selection
-```
-
-### Continuous Regeneration (Watch Mode)
-
-```bash
-python main.py --source target_code.py --watch
-```
-
-This mode runs the pipeline once, then re-runs automatically whenever the source file changes.
-
-Useful flags:
-
-- `--test-output tests/test_generated.py`
-- `--report-output reports/report.json`
-- `--model gemini-2.5-flash`
-- `--base-ref HEAD~1`
-- `--watch`
-- `--watch-interval 1.0`
-
-### Agentic vs Traditional Benchmark
-
-```bash
-python scripts/compare_methods.py --source target_code.py --runs 3
-```
-
-Useful flags:
-
-- `--report-output reports/comparison_report.json`
-- `--max-heal-attempts 2`
-- `--base-ref HEAD~1`
-- `--model gemini-2.5-flash`
-
-## CI
-
-GitHub Actions workflow outputs:
-
-- `tests/test_generated.py`
-- `reports/report.json`
-- `reports/comparison_report.json`
-- `reports/comparison_report.csv`
-- `reports/comparison_report.md`
+**Author:** [Chiththaja Galabodage](https://github.com/ChiththajaGalabodage)
